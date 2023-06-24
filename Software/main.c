@@ -16,7 +16,7 @@
 #include "QMI8658.h"
 #include "Debug.h"
 
-#define BUTTON1 22 // Sponsored by Supreme
+#define BUTTON1 22 // connect your push button switch to GPIO22 on the LCD module
 
 char* getMonth(int mont){
     char* realMonth;
@@ -173,44 +173,6 @@ void WatchFace2(int rtcHour, int rtcMin, int rtcSec, int rtcDay, int rtcMonth, i
     Paint_DrawLine(142, 75, 215, 75, WBROWN, 1, LINE_STYLE_SOLID);
 }
 
-void WatchFace3(int rtcHour, int rtcMin, int rtcSec, int rtcDay, int rtcMonth, int rtcDotw){
-    char strHour[3];
-    sprintf (strHour, "%02d", rtcHour);
-
-    char strMin[2];
-    sprintf (strMin, "%02d", rtcMin);
-
-    char strSec[2];
-    sprintf (strSec, "%02d", rtcSec);
-
-    // date
-    char Date[5];
-    sprintf (Date, "%s-%02d", getMonth(rtcMonth), rtcDay);
-
-    // bat
-    char realBatPercent[3];
-    sprintf(realBatPercent, "%02d", batPercent());
-
-    //temp
-    char temp[3];
-    sprintf(temp, "%02dC", ((int)QMI8658_readTemp()));
-
-    Paint_DrawString_EN(8, 65, ("%s", strHour), &FontRobotoMono83, WHITE, GRAY);
-    Paint_DrawString_EN(104, 65, ("%s", strMin), &FontRobotoMono83, ABLUE, GRAY);
-    Paint_DrawString_EN(202, 86, ("%s", strSec), &FontRobotoMono27, WHITE, GRAY);
-
-    // Paint_DrawString_EN(137, 75, ("%s", Date), &FontRobotoMono22, WHITE, BLACK);
-    // Paint_DrawString_EN(157, 50, ("%s", getDay(rtcDotw)), &FontRobotoMono22, WBROWN, BLACK);
-
-    // Paint_DrawString_EN(95, 200, ("%s", realBatPercent), &FontRobotoMono24, WHITE, BLACK);
-    // Paint_DrawString_EN(139, 200, "%", &FontRobotoMono24, WHITE, BLACK);
-    // Paint_DrawString_EN(180, 145, ("%s", temp), &FontRobotoMono22, WBROWN, BLACK);
-
-    // Paint_DrawLine(183, 146, 220, 146, WBROWN, 1, LINE_STYLE_SOLID);
-    // Paint_DrawLine(142, 75, 215, 75, WBROWN, 1, LINE_STYLE_SOLID);
-
-}
-
 void IMUFace(float accX, float accY, float accZ, float gyroX, float gyroY, float gyroZ){
     accX = accX/9.807;
     accY = accY/9.807;
@@ -246,11 +208,10 @@ void IMUFace(float accX, float accY, float accZ, float gyroX, float gyroY, float
 
 }
 
-void refreshDisp(int donnyJ){
-    // donnyJ = 0; // DJT 2024 
-    if (donnyJ == 0){
+void refreshDisp(int paintFlag){
+    if (paintFlag == 0){
         Paint_Clear(BLACK); // idk if this is the best way to do something once lol
-        donnyJ += 1;
+        paintFlag += 1;
     }
 }
 
