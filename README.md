@@ -19,6 +19,8 @@ This watch currently doesn't do anything else than show time, date, and ambient 
 
 WatchPi has two watch faces and one that shows the raw data from the onboard IMU. Since it has an IMU a raise-to-wake feature can be added.
 
+For more info on this project check out the write-up about WatchPi [on my website](https://www.abhignay.com/watchpi)
+
 If you have any questions or suggestions feel free to open up an issue.
 
 ## License
